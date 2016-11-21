@@ -75,5 +75,6 @@ function rss_encode($data) {
 	$rss .= '</channel>
 	</rss>';
 
+	header('Content-Type: application/rss+xml');
 	echo $rss;
 }
