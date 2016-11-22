@@ -38,8 +38,7 @@ function rss_encode($data) {
 	               <title>On This Day</title>
 	               <description></description>
 	               <link>' . site_url() . '/?on_this_day</link>
-	               <language>en-gb</language>
-	               <pubDate>'.$pubDate.'</pubDate>';
+	               <language>en-gb</language>';
 
 	$posts = $data->get_posts();
 
