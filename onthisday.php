@@ -57,7 +57,7 @@ function rss_encode($data) {
 		//	AND before the current hour (prevents suddenly adding loads of posts)
 		if (
 		      ( intval(date("Y", strtotime($date))) <  intval($today['year'] ) ) &&
-		      ( intval(date("h", strtotime($date))) <= intval($today['hours']) )
+		      ( intval(date("H", strtotime($date))) <= intval($today['hours']) )
 		) {
 				$rss .= '<item>
 				   <title>'  .html_entity_decode($archive . $title).'</title>
