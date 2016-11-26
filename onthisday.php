@@ -49,7 +49,7 @@ function rss_encode($data) {
 		$link = get_permalink($id);
 		$date = $post->post_date;
 		$postDate = date("D, d M Y") . " " . date("h:i:s O", strtotime($date));
-		$thumb = get_the_post_thumbnail($id);
+		$thumb = get_the_post_thumbnail($id, 'full');
 
 		$archive = "From the " . date("F Y", strtotime($date)) . " archives: ";
 
