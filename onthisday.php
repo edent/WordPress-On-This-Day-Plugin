@@ -11,8 +11,13 @@ add_action( 'init', 'edent_on_this_day' );
 
 function edent_on_this_day()
 {
-	  if( isset( $_GET['on_this_day'] ) ) {
-		$today = getdate();
+	if( isset( $_GET['on_this_day'] ) ) {
+		if( isset( $_GET['month'] ) && isset( $_GET['day'] ) ) {
+			$today = getdate(strtotime("2000-".$_GET['month']."-".$_GET['day']));
+		} else {
+			$today = getdate();
+		}
+
 		$args = array(
 		   'date_query' => array(
 		      array(
@@ -77,3 +82,4 @@ function rss_encode($data) {
 	header('Content-Type: application/rss+xml');
 	echo $rss;
 }
+
