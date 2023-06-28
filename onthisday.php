@@ -4,11 +4,63 @@ Plugin Name: OnThisDay
 Description: RSS feed of posts which occurred on this day in the past
 */
 
+function edent_on_this_day_shortcode() {
+	if( isset( $_GET['month'] ) && isset( $_GET['day'] ) ) {
+		$today = getdate(strtotime("2000-".$_GET['month']."-".$_GET['day']));
+	} else {
+		$today = getdate();
+	}
+
+	$args = array(
+		'date_query' => array(
+			array(
+				'month' => $today['mon'],
+				'day'   => $today['mday'],
+			),
+		),
+	);
+	$query = new WP_Query( $args );
+	$posts = $query->get_posts();
+
+	$today = getdate();
+	$pubDate =  date("D, d M Y") . " 00:00:00 GMT";
+
+	$output  = "<h2>From the " . date("jS \of F") . " archives</h2>";
+	$output .= "<ul>";
+
+	foreach($posts as $post) {
+		// Do your stuff, e.g.
+		$title = $post->post_title;
+		$id	 = $post->ID;
+		$link  = get_permalink($id);
+		$date  = $post->post_date;
+		$postDate = date("D, d M Y") . " " . date("h:i:s O", strtotime($date));
+		// $thumb = get_the_post_thumbnail($id, 'full');
+
+		$archive = "" . date("Y", strtotime($date)) . ": ";
+
+		//	Only add an item if it is before *this year*
+		if (
+			intval(date("Y", strtotime($date))) <  intval($today['year'])
+		) {
+			$output .= '<li><a href="' . htmlspecialchars($link) .'">';
+			$output .= html_entity_decode($archive . $title) . '</a></li>';
+		}
+	}
+	$output .= "</ul>";
+	return $output;
+}
+
+//	Set up the shortcode
+function edent_on_this_day_shortcode_init() {
+	add_shortcode( 'edent_on_this_day', 'edent_on_this_day_shortcode' );
+}
+add_action( 'init', 'edent_on_this_day_shortcode_init' );
+
 //	RSS of today's historic blog posts
 //	Visible at example.com/?on_this_day
 
 add_action( 'init', 'edent_on_this_day' );
-
 function edent_on_this_day()
 {
 	if( isset( $_GET['on_this_day'] ) ) {
@@ -82,4 +134,5 @@ function rss_encode($data) {
 	header('Content-Type: application/rss+xml');
 	echo $rss;
 }
+
 
