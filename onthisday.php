@@ -31,7 +31,7 @@ function edent_on_this_day_shortcode() {
 	foreach($posts as $post) {
 		// Do your stuff, e.g.
 		$title = $post->post_title;
-		$id	 = $post->ID;
+		$id    = $post->ID;
 		$link  = get_permalink($id);
 		$date  = $post->post_date;
 		$postDate = date("D, d M Y") . " " . date("h:i:s O", strtotime($date));

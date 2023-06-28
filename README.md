@@ -1,6 +1,6 @@
 # WordPress On-This-Day Plugin
 
-This simple plugin generates an RSS feed of your blog posts which were published "on this day" in the past.
+This simple plugin generates an HTML page or RSS feed of your blog posts which were published "on this day" in the past.
 
 For example, if today is 21st of November 2016 then this will show a list of blog posts written on
 
@@ -10,7 +10,8 @@ For example, if today is 21st of November 2016 then this will show a list of blo
 
 And so on.
 
-You can view a demo at https://shkspr.mobi/blog/?on_this_day
+* RSS demo at https://shkspr.mobi/blog/?on_this_day
+* HTML demo at https://shkspr.mobi/blog/on-this-day/
 
 ## Limitations
 
@@ -25,6 +26,8 @@ This allows services like IFTTT to post the feed to Twitter throughout the day r
 ### Location
 
 This plugin lives at `https://example.com/?on_this_day`.  The results are *not* cached.
+
+It can be placed on any WordPress page with the shortcode `[edent_on_this_day]`
 
 ### Images
 
